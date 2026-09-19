@@ -172,6 +172,57 @@ body.focus .col{display:none}
   #timecode{display:none}
   #btnFocus{top:6px;right:6px}
 }
+/* ============ v2.0.3 MOBILE-FIRST FALLBACK ============
+   Phone layout is the default; desktop is an enhancement gated
+   behind min-width. A WebView that ignores/drops media queries
+   still renders the phone UI instead of the desktop grid. */
+#app{grid-template-rows:48px 1fr 46px 96px;grid-template-columns:minmax(0,1fr)}
+#app>*{min-width:0}
+.hsep,#clock,.hlabel,#resScale{display:none}
+.logo b{font-size:13px}
+.logo span{display:none}
+#btnShuffle,#btnResetFx,#btnSnapshot{display:none}
+header{gap:6px;padding:0 8px}
+header .btxt{display:none}
+header .btn{padding:7px 9px;flex:none}
+header .logo{flex:none;margin-right:auto}
+#main{display:block;position:relative}
+#stage{position:absolute;inset:0}
+.col{position:fixed;top:48px;bottom:142px;width:min(320px,88vw);z-index:40;box-shadow:0 0 60px rgba(0,0,0,.6)}
+.col.left{left:0;transform:translateX(-105%);border-right:1px solid var(--line2)}
+.col.right{right:0;transform:translateX(105%);border-left:1px solid var(--line2)}
+.col.drawer-open{transform:translateX(0)}
+.drawer-close{display:block;position:absolute;top:8px;right:10px;width:30px;height:30px;border-radius:7px;border:1px solid var(--line2);background:var(--panel2);color:var(--dim);font-size:14px;cursor:pointer;z-index:2}
+.col.right .drawer-close{right:auto;left:10px}
+#mobilebar{display:flex;gap:8px;padding:7px 10px;background:var(--panel);border-top:1px solid var(--line);align-items:center}
+#mobilebar .btn{flex:1;justify-content:center;font-size:10px;padding:6px 2px;gap:3px}
+#dock{padding:8px 10px;gap:7px}
+#viewport-wrap{padding:8px}
+#transport{padding:7px 8px;gap:7px}
+#timecode{display:none}
+#btnFocus{top:6px;right:6px}
+@media (min-width:921px){
+  #app{grid-template-rows:52px 1fr 118px;grid-template-columns:minmax(0,1fr)}
+  .hsep,#clock,.hlabel,#resScale{display:revert}
+  .logo b{font-size:15px}
+  .logo span{display:block}
+  #btnShuffle,#btnResetFx,#btnSnapshot{display:inline-flex}
+  header{gap:14px;padding:0 16px}
+  header .btxt{display:inline}
+  header .btn{padding:7px 14px}
+  header .logo{margin-right:0}
+  #main{display:grid;grid-template-columns:280px 1fr 320px}
+  #stage{position:static}
+  .col{position:static;width:auto;top:auto;bottom:auto;z-index:auto;box-shadow:none;transform:none!important}
+  .col.right .drawer-close{display:none}
+  .drawer-close{display:none}
+  #mobilebar{display:none}
+  #dock{padding:10px 14px;gap:10px}
+  #viewport-wrap{padding:14px}
+  #transport{padding:9px 14px;gap:10px}
+  #timecode{display:block}
+  #btnFocus{top:8px;right:8px}
+}
 </style>
 </head>
 <body>
@@ -348,6 +399,7 @@ body.focus .col{display:none}
       <span>HISTORY <b id="stHist">0</b> fr</span>
       <span>MOSHPOWER <b id="stMosh">0%</b></span>
       <span id="stCodec">VP9 · 30fps · 14 Mbps</span>
+      <span id="buildTag" style="color:var(--acc3)"></span>
     </div>
   </div>
 </div>

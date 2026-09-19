@@ -978,8 +978,7 @@ $("mbExport").onclick = () => $("btnExport").click();
    dropped (old WebView, delivery corruption), the phone layout
    must never collapse to the desktop grid. */
 function enforceMobileLayout() {
-  const phone = matchMedia("(pointer:coarse)").matches ||
-    Math.min(screen.width, screen.height) / (window.devicePixelRatio || 1) <= 480;
+  const phone = Math.min(screen.width, screen.height) / (window.devicePixelRatio || 1) <= 480;
   if (!phone) return;
   const main = $("main");
   main.style.setProperty("display", "block", "important");
@@ -991,8 +990,11 @@ function enforceMobileLayout() {
   const bar = $("mobilebar");
   if (bar) bar.style.setProperty("display", "flex", "important");
   const app = $("app");
-  if (app && document.documentElement.scrollWidth > innerWidth + 8) {
-    app.style.width = "100vw";
+  if (app) {
+    [...app.children].forEach(k => k.style.setProperty("min-width", "0", "important"));
+    if (document.documentElement.scrollWidth > innerWidth + 8) {
+      app.style.setProperty("width", "100vw", "important");
+    }
   }
 }
 enforceMobileLayout();
@@ -1228,7 +1230,8 @@ $("presetFile").onchange = () => {
    EXPORT - canvas captureStream + MediaRecorder
    ============================================================ */
 let captureFps = 30;
-segWire($("fpsSeg"), v => { captureFps = parseInt(v); updateStatLine(); });
+segWire($("fpsSeg"), v => { captureFps = parseInt(v); updateStatLine();
+ });
 
 const codecSel = $("codec"), bitrateSel = $("bitrate");
 function pickMime() {
@@ -1341,3 +1344,7 @@ if (matchMedia("(pointer: coarse)").matches) {
 }
 
 updateStatLine();
+/* build tag - visible proof of which build is running */
+const BUILD = "v2.0.3 \u00b7 2026-09-18";
+const bt = $("buildTag");
+if (bt) bt.textContent = BUILD;
