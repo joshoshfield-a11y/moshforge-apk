@@ -1345,6 +1345,6 @@ if (matchMedia("(pointer: coarse)").matches) {
 
 updateStatLine();
 /* build tag - visible proof of which build is running */
-const BUILD = "v2.0.3 \u00b7 2026-09-18";
+const BUILD = "v2.0.4 \u00b7 2026-09-19";
 const bt = $("buildTag");
 if (bt) bt.textContent = BUILD;
