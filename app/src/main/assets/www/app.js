@@ -969,6 +969,7 @@ $("mbFx").onclick = () => {
 $("closeLeft").onclick = () => $("colLeft").classList.remove("drawer-open");
 $("closeRight").onclick = () => $("colRight").classList.remove("drawer-open");
 $("mbSnap").onclick = () => $("btnSnapshot").click();
+$("mbBomb").onclick = () => triggerBomb();
 $("mbExport").onclick = () => $("btnExport").click();
 
 loop();

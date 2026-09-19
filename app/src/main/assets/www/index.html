@@ -147,11 +147,15 @@ body.focus .col{display:none}
 #mobilebar{display:none}
 @media (max-width:920px){
   #app{grid-template-rows:48px 1fr 46px 96px}
-  header{gap:8px;padding:0 10px}
+  header{gap:6px;padding:0 8px}
   .hsep,#clock,.hlabel,#resScale{display:none}
   .logo b{font-size:13px}
+  .logo span{display:none}
   #btnShuffle,#btnResetFx{display:none}
-  .btn{padding:7px 10px;font-size:11px}
+  header #btnSnapshot{display:none}
+  header .btxt{display:none}
+  header .btn{padding:7px 9px;flex:none}
+  header .logo{flex:none;margin-right:auto}
   #main{display:block;position:relative}
   #stage{position:absolute;inset:0}
   .col{position:fixed;top:48px;bottom:142px;width:min(320px,88vw);z-index:40;transition:transform .25s ease;box-shadow:0 0 60px rgba(0,0,0,.6)}
@@ -161,7 +165,7 @@ body.focus .col{display:none}
   .drawer-close{display:block;position:absolute;top:8px;right:10px;width:30px;height:30px;border-radius:7px;border:1px solid var(--line2);background:var(--panel2);color:var(--dim);font-size:14px;cursor:pointer;z-index:2}
   .col.right .drawer-close{right:auto;left:10px}
   #mobilebar{display:flex;gap:8px;padding:7px 10px;background:var(--panel);border-top:1px solid var(--line);align-items:center}
-  #mobilebar .btn{flex:1;justify-content:center}
+  #mobilebar .btn{flex:1;justify-content:center;font-size:10px;padding:6px 2px;gap:3px}
   #dock{padding:8px 10px;gap:7px}
   #viewport-wrap{padding:8px}
   #transport{padding:7px 8px;gap:7px}
@@ -186,7 +190,7 @@ body.focus .col{display:none}
       </select>
     </div>
     <div class="spacer"></div>
-    <button class="btn bomb" id="btnBomb" title="2 seconds of maximum chaos, then auto I-frame">🧨 Mosh Bomb</button>
+    <button class="btn bomb" id="btnBomb" title="2 seconds of maximum chaos, then auto I-frame">🧨<span class="btxt"> Bomb</span></button>
     <button class="btn" id="btnShuffle" title="Randomize all parameters (R)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
       Randomize</button>
@@ -196,7 +200,7 @@ body.focus .col{display:none}
       Snapshot</button>
     <button class="btn primary" id="btnExport" title="Record & export WebM (E)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
-      Export Video</button>
+      <span class="btxt">Export Video</span></button>
   </header>
 
   <div id="main">
@@ -325,6 +329,7 @@ body.focus .col{display:none}
   <div id="mobilebar">
     <button class="btn" id="mbSource">📂 Source</button>
     <button class="btn" id="mbFx">🎛 FX Rack</button>
+    <button class="btn" id="mbBomb">🧨 Bomb</button>
     <button class="btn teal" id="mbSnap">📸 Snap</button>
     <button class="btn primary" id="mbExport">⬇ Export</button>
   </div>
