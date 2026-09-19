@@ -972,6 +972,32 @@ $("mbSnap").onclick = () => $("btnSnapshot").click();
 $("mbBomb").onclick = () => triggerBomb();
 $("mbExport").onclick = () => $("btnExport").click();
 
+
+/* ---------------- mobile layout enforcer ----------------
+   Inline-style backstop: even if the stylesheet is partially
+   dropped (old WebView, delivery corruption), the phone layout
+   must never collapse to the desktop grid. */
+function enforceMobileLayout() {
+  const phone = matchMedia("(pointer:coarse)").matches ||
+    Math.min(screen.width, screen.height) / (window.devicePixelRatio || 1) <= 480;
+  if (!phone) return;
+  const main = $("main");
+  main.style.setProperty("display", "block", "important");
+  main.style.setProperty("position", "relative", "important");
+  document.querySelectorAll("#main .col").forEach(c => {
+    c.style.setProperty("position", "fixed", "important");
+    c.style.setProperty("z-index", "40", "important");
+  });
+  const bar = $("mobilebar");
+  if (bar) bar.style.setProperty("display", "flex", "important");
+  const app = $("app");
+  if (app && document.documentElement.scrollWidth > innerWidth + 8) {
+    app.style.width = "100vw";
+  }
+}
+enforceMobileLayout();
+window.addEventListener("resize", enforceMobileLayout);
+
 loop();
 
 /* ============================================================

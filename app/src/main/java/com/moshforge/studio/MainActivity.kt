@@ -27,6 +27,14 @@ class MainActivity : ComponentActivity() {
         web.settings.javaScriptEnabled = true
         web.settings.domStorageEnabled = true
         web.settings.allowFileAccess = true
+        // Honor the page's <meta name=viewport> (width=device-width) so the
+        // mobile CSS media query actually sees a phone-width viewport.
+        // Without these, WebView ignores the meta tag and layout can blow
+        // out to ~980 css px, clipping the UI on phones.
+        web.settings.useWideViewPort = true
+        web.settings.loadWithOverviewMode = true
+        web.settings.mediaPlaybackRequiresUserGesture = false
+        web.settings.textZoom = 100
         web.webViewClient = WebViewClient()
         web.webChromeClient = object : WebChromeClient() {
             override fun onShowFileChooser(
